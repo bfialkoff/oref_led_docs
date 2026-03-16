@@ -2,53 +2,45 @@
 
 ## Known Issues
 
-<!-- No known issues at this time. -->
-
-None currently. File issues at https://github.com/bfialkoff/oref_led_docs/issues.
+None currently. Report issues at https://github.com/bfialkoff/oref_led_docs/issues.
 
 ## Troubleshooting
 
-### Yellow LED stays on (error state)
+### LED doesn't turn on at all
 
-The yellow LED means the monitor can't reach the alert API. Check:
+- Make sure the USB-C cable is connected and providing power (you should see a small red power light on the device itself).
+- Check that the LED board is wired correctly: 5V to V_USB, GND to GND, DI to IO8.
+- Try a different USB-C cable -- some cables are charging-only and don't supply enough power.
 
-1. **Network connectivity** — `ping google.com` from the Pi
-2. **API health** — `curl https://pikud-alert.bfialkoff.workers.dev/health` — should return `{"ok": true, ...}`
-3. **API key** — verify `.env` has the correct `ALERT_API_KEY`
-4. **DNS resolution** — `nslookup pikud-alert.bfialkoff.workers.dev`
+### Yellow blink won't stop (can't connect to WiFi)
 
-### LEDs don't light up
+- Make sure you entered the correct WiFi password during setup.
+- Move the device closer to your WiFi router.
+- Hold the button near the USB port for 3 seconds to reset WiFi settings, then set up again.
+- Make sure your WiFi is 2.4GHz -- the device does not support 5GHz networks.
 
-1. **Wiring** — run `python test.py` to cycle through all three LEDs
-2. **GPIO permissions** — make sure your user is in the `gpio` group: `groups` should show `gpio`
-3. **Pin numbers** — the code uses BCM numbering (GPIO 17, 27, 22), not physical pin numbers
+### Yellow solid light (error state)
 
-### Service won't start
+- The device is connected to WiFi but can't reach the alert service.
+- Check your internet connection -- try loading a website on your phone.
+- This usually resolves on its own once the internet connection is restored.
+- If it persists, restart the device by pressing the button near the LED.
 
-```bash
-sudo systemctl status pikud-leds
-sudo journalctl -u pikud-leds --no-pager -n 50
-```
+### Setup page doesn't appear on phone
 
-Common causes:
-- Missing `.env` file
-- `.venv/` not created (run `uv sync`)
-- Python path wrong (check `setup.sh` uses the correct venv path)
+- Make sure your phone is connected to **"PikudAlert-Setup"** (not your home WiFi).
+- Try opening your browser and going to `http://192.168.4.1`.
+- If the "PikudAlert-Setup" network doesn't appear, the device might have already connected to a saved WiFi network. Hold the button near USB for 3 seconds to reset.
 
-### Service starts but LEDs don't respond
+### Device keeps restarting
 
-The service runs as a non-root user. Verify GPIO access:
+- This can happen if WiFi is unstable. The device will keep trying to connect and eventually succeed.
+- Make sure the WiFi signal is strong enough where the device is placed.
 
-```bash
-# Check if lgpio/gpiozero works for your user
-python3 -c "from gpiozero import LED; led = LED(17); led.on(); led.off(); print('OK')"
-```
-
-## Reporting Bugs
+## Reporting Issues
 
 Open an issue at https://github.com/bfialkoff/oref_led_docs/issues with:
 
-1. What happened vs what you expected
-2. Output of `sudo journalctl -u pikud-leds --no-pager -n 50`
-3. Output of `curl https://pikud-alert.bfialkoff.workers.dev/health`
-4. Your Pi model and OS version (`cat /etc/os-release`)
+1. What you see (LED color and pattern)
+2. What you expected to see
+3. How long the device has been in this state

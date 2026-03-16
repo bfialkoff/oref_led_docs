@@ -1,117 +1,82 @@
 # Setup Guide
 
-## Prerequisites
+## What You Need
 
-### Hardware
-
-- Raspberry Pi (tested on Pi 4/5, any model with GPIO should work)
-- 3x LEDs (red, green, yellow)
-- 3x 220Ω resistors
-- Breadboard and jumper wires
-
-### Software
-
-- Raspberry Pi OS (Bookworm or later)
-- Python 3.11+
-- [uv](https://docs.astral.sh/uv/) package manager
-- An API key for the Pikud Alert service (contact the maintainer)
+- The alert monitor device
+- The RGB LED (small board with a single LED)
+- A USB-C cable and any USB power source (phone charger, power bank, etc.)
+- Your phone (for initial WiFi setup)
 
 ## Wiring
 
-| LED | GPIO Pin | Physical Pin |
-|-----|----------|-------------|
-| Yellow (error) | GPIO 17 | Pin 11 |
-| Red (alert) | GPIO 27 | Pin 13 |
-| Green (clear) | GPIO 22 | Pin 15 |
+Connect the LED breakout to the device:
 
-Each LED connects: `GPIO pin → 220Ω resistor → LED anode (+) → LED cathode (-) → GND`
+| LED Board | Device |
+|---|---|
+| 5V | V_USB |
+| GND | GND |
+| DI | IO8 |
 
-Use any GND pin (e.g., Pin 6, 9, 14, 20, 25).
+## First-Time Setup
 
-<!-- TODO: Add wiring diagram image -->
+### Step 1: Power On
 
-## Installation
+Plug the device in via USB-C. The LED will start **blinking yellow** -- this means it's ready to be configured.
 
-### 1. Download the latest release
+### Step 2: Connect Your Phone
 
-```bash
-# Check https://github.com/bfialkoff/oref_led_docs/releases for the latest version
-wget https://github.com/bfialkoff/oref_led_docs/releases/download/vX.Y.Z/pikud-leds-vX.Y.Z.tar.gz
-tar xzf pikud-leds-vX.Y.Z.tar.gz
-cd pikud-leds-vX.Y.Z
-```
+1. Open WiFi settings on your phone
+2. Connect to the network called **"PikudAlert-Setup"**
+3. A setup page will open automatically
+   - If it doesn't appear, open your browser and go to `http://192.168.4.1`
 
-### 2. Install uv (if not already installed)
+### Step 3: Configure
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-source ~/.bashrc
-```
+1. **Select your WiFi network** from the list and enter the password
+2. **Choose your city** -- tap the search box and start typing in Hebrew. A list of matching cities will appear. Tap your city to select it. The field marked with **\*** is required.
+3. Tap **Save**
 
-### 3. Install dependencies
+### Step 4: Done
 
-```bash
-uv sync
-```
+The device will restart and connect to your WiFi. You'll see:
 
-This creates a `.venv/` with all Python dependencies. System packages like `gpiozero` are picked up from the system Python.
+1. **Blue solid** (3 seconds) -- WiFi connected
+2. **Green slow pulse** -- all clear, monitoring active
 
-### 4. Configure
+That's it. The device is now monitoring alerts for your city.
 
-```bash
-cp .env.example .env
-nano .env  # paste your API key
-```
+## LED Status Guide
 
-### 5. Test
+| LED | What It Means | What To Do |
+|---|---|---|
+| Yellow blinking | Setup mode / no WiFi | Connect your phone to "PikudAlert-Setup" and configure |
+| Blue solid | WiFi connected | Wait -- switches to green in a few seconds |
+| Green slow pulse | All clear | Nothing -- no active alerts in your city |
+| **Red fast blink** | **Alert active** | **Seek shelter immediately** |
+| Yellow solid | Connection error | Check your internet. Will recover automatically. |
 
-```bash
-# Test LED wiring (cycles through all three LEDs)
-.venv/bin/python test.py
+## Changing WiFi or City
 
-# Test with mock alerts (no API needed)
-.venv/bin/python main.py --test
+If you move to a new location or change your WiFi network:
 
-# Test with real API
-.venv/bin/python main.py
-```
+1. **Press and hold the small button near the USB port** for 3 seconds
+   - The LED will go solid while you hold it
+   - After 3 seconds, the device resets
+2. The LED starts **blinking yellow** -- setup mode
+3. Follow Steps 2-4 from First-Time Setup above
 
-### 6. Install as boot service
+**Note:** The other button (near the LED) is the reset button -- it just restarts the device without erasing your settings.
 
-```bash
-bash setup.sh
-```
+## Firmware Updates
 
-This creates a systemd service that starts the monitor on boot. To check status:
+Updates happen automatically. The device checks for new firmware every 6 hours. If a new version is available, it downloads and installs it, then restarts. You don't need to do anything.
 
-```bash
-sudo systemctl status pikud-leds
-sudo journalctl -u pikud-leds -f  # live logs
-```
+## Troubleshooting
 
-### 7. Uninstall service
-
-```bash
-bash setup.sh --cleanup
-```
-
-## Command-Line Options
-
-```bash
-# Monitor all cities (default)
-.venv/bin/python main.py
-
-# Monitor specific cities
-.venv/bin/python main.py --cities "נתניה - מזרח" "תל אביב - מרכז העיר"
-
-# Use mock alerts for testing
-.venv/bin/python main.py --test
-```
-
-## Updating
-
-1. Download the new release
-2. Extract to the same directory (overwrites source files)
-3. Your `.env` will not be overwritten (it's not included in the release)
-4. Run `uv sync` to update dependencies
-5. Restart the service: `sudo systemctl restart pikud-leds`
+| Problem | Solution |
+|---|---|
+| LED doesn't turn on | Check that the LED board is wired correctly (5V, GND, DI). Try a different USB-C cable. |
+| Yellow blink won't stop | The device can't connect to WiFi. Make sure you entered the correct password. Try moving closer to your router. Hold the button near USB for 3s to reset and try again. |
+| Yellow solid (not blinking) | The device is connected to WiFi but can't reach the alert service. Check your internet connection. It will recover on its own when the connection is restored. |
+| Setup page won't load on phone | Make sure you're connected to "PikudAlert-Setup" (not your home WiFi). Try going to `http://192.168.4.1` manually in your browser. |
+| Red blink but no alert in my area | The device monitors the city you selected during setup. If you need to change cities, hold the button near USB for 3s to reset. |
