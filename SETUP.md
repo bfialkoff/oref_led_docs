@@ -27,10 +27,7 @@ Plug the device into a USB-C charger. The LED will start **blinking yellow** -- 
 
 ### Step 4: Place It
 
-The device will restart and connect to your WiFi. You'll see:
-
-1. **Blue solid** (3 seconds) -- WiFi connected
-2. **Green slow pulse** -- all clear, monitoring active
+The device will restart and connect to your WiFi. The LED will turn **solid green** -- all clear, monitoring is active.
 
 Place the device in your safe room where you can see the LED. That's it.
 
@@ -39,8 +36,7 @@ Place the device in your safe room where you can see the LED. That's it.
 | LED | What It Means |
 |---|---|
 | Yellow blinking | Setup mode / no WiFi -- connect your phone to "PikudAlert-Setup" |
-| Blue solid (brief) | WiFi just connected |
-| Green slow pulse | All clear -- no active alerts in your city |
+| Green solid | All clear -- no active alerts in your city |
 | **Red fast blink** | **Alert active -- stay in the safe room** |
 | Yellow solid | Connection issue -- check your internet. Will recover on its own. |
 

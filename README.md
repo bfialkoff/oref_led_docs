@@ -1,3 +1,5 @@
+[עברית](README.he.md)
+
 # Pikud HaOref LED Alert Monitor
 
 A small, silent device that shows the current Pikud HaOref (Israel Home Front Command) alert status for your city using a single color LED. Designed to be placed in your safe room.
@@ -22,7 +24,7 @@ A small, silent device that shows the current Pikud HaOref (Israel Home Front Co
 | LED | Meaning |
 |-----|---------|
 | **Red (blinking)** | Alert active in your city -- stay in the safe room |
-| **Green (slow pulse)** | All clear -- you may leave the safe room |
+| **Green (solid)** | All clear -- you may leave the safe room |
 | **Yellow (solid)** | Cannot reach alert service -- check your internet |
 | **Yellow (blinking)** | Setup mode -- connect your phone to configure |
 
