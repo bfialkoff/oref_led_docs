@@ -10,7 +10,7 @@
 
 ### Step 1: Plug In
 
-Plug the device into a USB-C charger. The LED will start **blinking yellow** -- this means it's ready to be configured.
+Plug the device into a USB-C charger. The LED will start **blinking blue** -- this means it's ready to be configured.
 
 ### Step 2: Connect Your Phone
 
@@ -35,10 +35,12 @@ Place the device in your safe room where you can see the LED. That's it.
 
 | LED | What It Means |
 |---|---|
-| Yellow blinking | Setup mode / no WiFi -- connect your phone to "PikudAlert-Setup" |
+| Blue blinking | Setup mode / no WiFi -- connect your phone to "PikudAlert-Setup" |
 | Green solid | All clear -- no active alerts in your city |
-| **Red fast blink** | **Alert active -- stay in the safe room** |
-| Yellow solid | Connection issue -- check your internet. Will recover on its own. |
+| Yellow solid | Pre-alert -- alerts expected soon in your area |
+| **Red solid** | **Alert active -- stay in the safe room** |
+| Blue solid | Connection issue -- check your internet. Will recover on its own. |
+| Green blinking | Software update in progress |
 
 **Note:** Alert data may be delayed by up to two minutes compared to the official siren. When the LED turns green, the official all-clear has been given.
 
@@ -49,7 +51,7 @@ If you move, change your WiFi, or want to monitor a different city:
 1. **Press and hold the small button near the USB port** for 3 seconds
    - The LED will go solid while you hold it
    - After 3 seconds, the device resets
-2. The LED starts **blinking yellow** -- back in setup mode
+2. The LED starts **blinking blue** -- back in setup mode
 3. Follow Steps 2-3 above
 
 **Tip:** The other button (further from the USB port) simply restarts the device without erasing your settings.
@@ -63,7 +65,7 @@ Updates happen automatically. The device periodically checks for new firmware an
 | Problem | Solution |
 |---|---|
 | LED doesn't turn on | Try a different USB-C cable or charger. |
-| Yellow blink won't stop | Can't connect to WiFi. Check your password. Try moving closer to the router. Hold the button near USB for 3s to reset and try again. |
-| Yellow solid | Connected to WiFi but can't reach the alert service. Check your internet. Will recover on its own. |
+| Blue blink won't stop | Can't connect to WiFi. Check your password. Try moving closer to the router. Hold the button near USB for 3s to reset and try again. |
+| Blue solid | Connected to WiFi but can't reach the alert service. Check your internet. Will recover on its own. |
 | Setup page won't load | Make sure your phone is connected to "PikudAlert-Setup" (not your home WiFi). Try `http://192.168.4.1` in your browser. |
 | Red blink but no alert in my area | The device monitors the city you chose. Hold the button near USB for 3s to change it. |

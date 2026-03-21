@@ -1,4 +1,8 @@
-[עברית](README.he.md)
+<div align="center">
+
+## [עברית](README.he.md)
+
+</div>
 
 # Pikud HaOref LED Alert Monitor
 
@@ -23,10 +27,12 @@ A small, silent device that shows the current Pikud HaOref (Israel Home Front Co
 
 | LED | Meaning |
 |-----|---------|
-| **Red (blinking)** | Alert active in your city -- stay in the safe room |
+| **Red (solid)** | Alert active in your city -- stay in the safe room |
+| **Yellow (solid)** | Pre-alert -- alerts expected soon in your area |
 | **Green (solid)** | All clear -- you may leave the safe room |
-| **Yellow (solid)** | Cannot reach alert service -- check your internet |
-| **Yellow (blinking)** | Setup mode -- connect your phone to configure |
+| **Blue (solid)** | Cannot reach alert service -- check your internet |
+| **Blue (blinking)** | Setup mode -- connect your phone to configure |
+| **Green (blinking)** | Software update in progress |
 
 ## Quick Start
 

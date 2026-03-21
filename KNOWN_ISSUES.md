@@ -12,14 +12,14 @@ None currently. Report issues at https://github.com/bfialkoff/oref_led_docs/issu
 - Try a different charger or USB port.
 - Make sure the charger provides 5V (any standard phone charger works).
 
-### Yellow blink won't stop (can't connect to WiFi)
+### Blue blink won't stop (can't connect to WiFi)
 
 - Make sure you entered the correct WiFi password during setup.
 - Move the device closer to your WiFi router.
 - The device only supports 2.4GHz WiFi networks (not 5GHz).
 - Hold the button near the USB port for 3 seconds to reset and try again.
 
-### Yellow solid light (not blinking)
+### Blue solid light (not blinking)
 
 - The device is connected to WiFi but can't reach the alert service.
 - Check your internet connection.
