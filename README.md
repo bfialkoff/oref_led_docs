@@ -16,6 +16,15 @@ A small, silent device that shows the current Pikud HaOref (Israel Home Front Co
 > supplementary, passive indicator -- not a replacement for sirens or
 > official alert apps.
 
+## Quick Start
+
+1. Plug the device into a standard USB-C phone charger (5V)
+2. On your phone, connect to the **"PikudAlert-Setup"** WiFi network
+3. Select your home WiFi, enter the password, choose your city
+4. Place the device in your safe room -- done
+
+See the full [Setup Guide](SETUP.md) for detailed instructions.
+
 ## Why
 
 - **Completely silent** -- no sounds, no phone buzzing. Just a light.
@@ -33,15 +42,6 @@ A small, silent device that shows the current Pikud HaOref (Israel Home Front Co
 | **Blue (solid)** | Cannot reach alert service -- check your internet |
 | **Blue (blinking)** | Setup mode -- connect your phone to configure |
 | **Green (blinking)** | Software update in progress |
-
-## Quick Start
-
-1. Plug the device into a standard USB-C phone charger (5V)
-2. On your phone, connect to the **"PikudAlert-Setup"** WiFi network
-3. Select your home WiFi, enter the password, choose your city
-4. Place the device in your safe room -- done
-
-See the full [Setup Guide](SETUP.md) for detailed instructions.
 
 ## How It Works
 
@@ -63,7 +63,6 @@ Command app, radio, siren).
 ## Documentation
 
 - [Setup Guide](SETUP.md) -- First-time setup, LED meanings, how to change WiFi or city
-- [Troubleshooting](KNOWN_ISSUES.md) -- Common issues and solutions
 
 ## License
 
